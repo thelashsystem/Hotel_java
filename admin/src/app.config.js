@@ -14,6 +14,7 @@
       app.menu(
         nga.menu()
           .addChild(nga.menu(user).icon('<span class="glyphicon glyphicon-user"></span>'))
+          .addChild(nga.menu().title('Calendar').link('/calendar').icon('<span class="glyphicon glyphicon-calendar"></span>'))
       );
 
       nga.configure(app);

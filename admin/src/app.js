@@ -20,10 +20,12 @@ angular.module('app.services', [
 ]);
 
 angular.module('app.directives', [
+    'directive.draggable'
 ]);
 
 angular.module('app.modules', [
-    'module.user'
+    'module.user',
+    'module.calendar'
 ]);
 
 angular.module('app', [
