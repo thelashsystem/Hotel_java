@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Lash Admin</title>
+
+        <!-- STYLE -->
+        <link href="assets/css/style.css" rel="stylesheet">
+
+        <!-- LIBRARY -->
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/moment/min/moment.min.js"></script>
+
+        <script src="node_modules/ng-admin/build/ng-admin.min.js"></script>
+        <link rel="stylesheet" href="node_modules/ng-admin/build/ng-admin.min.css">
+
+        <script src="node_modules/ngstorage/ngStorage.min.js"></script>
+
+        <script src="node_modules/angular-ui-calendar/src/calendar.js"></script>
+        <script src="node_modules/fullcalendar/dist/fullcalendar.min.js"></script>
+        <link rel="stylesheet" href="node_modules/fullcalendar/dist/fullcalendar.min.css">
+    </head>
+    <body>
+        <div ui-view="ng-admin"></div>
+
+        <!-- MODULES -->
+        <script src="src/modules/user/user.module.js"></script>
+
+        <!-- SERVICES -->
+        <script src="src/common/services/utility.service.js"></script>
+        <script src="src/common/services/user.service.js"></script>
+        <script src="src/common/services/auth.service.js"></script>
+
+        <!-- MAIN APP -->
+        <script src="src/app.js"></script>
+        <script src="src/app.controller.js"></script>
+        <script src="src/app.run.js"></script>
+        <script src="src/app.config.js"></script>
+    </body>
+</html>
