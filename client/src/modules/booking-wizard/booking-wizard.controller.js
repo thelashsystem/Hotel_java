@@ -127,28 +127,12 @@
                       .filter(item => item.active)
                       .map(item => item.employeeId);
 
-                Promise.all(employeeIds.map(BookingService.findAvailableTimeOfEmployee))
-                    .then(availableTimes => {
-                        employeeIds.forEach((id, index) => {
-                            $scope.availableTimes[id] = Object.keys(availableTimes[index]).reduce((result, timestamp) => {
-                                return {
-                                    ...result,
-                                    [moment(+timestamp).startOf('day').valueOf()]: availableTimes[index][timestamp]
-                                };
-                            }, {});
-                        });
+                employeeIds.forEach(id => {
+                    $scope.availableTimes[id] = $scope.employeesMap[id].available;
+                });
 
-                        Object.keys($scope.form.services).forEach(serviceId => {
-                            const service = $scope.form.services[serviceId];
-
-                            service.date = moment(+Object.keys($scope.availableTimes[service.employeeId])[0]);
-                        });
-
-                        $timeout(() => {
-                            $scope.loading = false;
-                            $scope.step = step;
-                        });
-                    });
+                $scope.loading = false;
+                $scope.step = step;
 
                 break;
             }

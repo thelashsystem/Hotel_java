@@ -311,12 +311,12 @@
 
                 <div class="list">
                     <div class="list-item service-item clickable" ng-class="{ active: form.services[item.id].active }"
-                         ng-repeat="(key, item) in servicesMap"
+                         ng-repeat="item in services"
                          ng-click="form.services[item.id].active = !form.services[item.id].active">
                         <div class="img">
                             <img alt="" ng-src="{{ item.img }}"/>
                         </div>
-                        <span class="text">{{ item.text }}</span>
+                        <span class="text">{{ item.name }}</span>
                     </div>
                 </div>
             </section>
@@ -325,7 +325,7 @@
 
                 <div class="list">
                     <div class="list-item flex space-between"
-                         ng-repeat="(key, item) in servicesMap"
+                         ng-repeat="item in services"
                          ng-if="form.services[item.id].active">
 
                         <div class="flex-item service-item w-70">
@@ -333,7 +333,7 @@
                                 <img alt="" ng-src="{{ item.img }}"/>
                             </div>
 
-                            <div class="text">{{ item.text }}</div>
+                            <div class="text">{{ item.name }}</div>
                         </div>
 
                         <div class="flex-item w-30">
@@ -341,7 +341,7 @@
                                 <ui-select-match placeholder="Select a employee">
                                     {{ $select.selected.name }}
                                 </ui-select-match>
-                                <ui-select-choices repeat="employee.id as employee in employees | propsFilter: { name: $select.search }">
+                                <ui-select-choices repeat="employee.id as employee in employees | filter:{ service_id: item.id } | propsFilter: { name: $select.search }">
                                     <div class="flex-item employee-item">
                                         <div class="img">
                                             <img alt="" ng-src="{{ employee.img }}"/>
@@ -360,7 +360,7 @@
 
                 <div class="list">
                     <div class="list-item flex space-between"
-                         ng-repeat="(key, item) in servicesMap"
+                         ng-repeat="item in services"
                          ng-if="form.services[item.id].active">
 
                         <div class="flex flex-item service-item w-80" style="align-items: center">
@@ -369,7 +369,7 @@
                             </div>
 
                             <div style="display: inline-flex; flex-flow: column">
-                                <span>{{ item.text }}</span>
+                                <span>{{ item.name }}</span>
                                 <b><small>Employee: {{ employeesMap[form.services[item.id].employeeId].name }}</small></b>
                             </div>
                         </div>
@@ -411,10 +411,10 @@
                         <tr>
                             <th>Services</th>
                             <td>
-                                <div ng-repeat="(key, item) in servicesMap"
+                                <div ng-repeat="item in services"
                                      ng-if="form.services[item.id].active"
                                      style="margin-bottom: 5px;">
-                                    <div>{{ item.text }} by <b>{{ employeesMap[form.services[item.id].employeeId].name }}</b></div>
+                                    <div>{{ item.name }} by <b>{{ employeesMap[form.services[item.id].employeeId].name }}</b></div>
                                     <div>at <b>{{ form.services[item.id].date.valueOf() | date:'medium' }}</b></div>
                                 </div>
                             </td>
