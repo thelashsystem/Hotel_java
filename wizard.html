@@ -544,7 +544,7 @@
                  },
                  findEmployees: function() {
                      return $http
-                         .get('http://server/findEmployees')
+                         .get(baseApiUrl + '/api/admin/list_employee')
                          .then(res => res.data)
                          .catch(err => [
                              { id: 1, name: 'Adam',      img: 'assets/images/item-1.jpg' },
@@ -745,6 +745,25 @@
                  }
              }
          }
+
+         services = {
+             id: 1,
+             name: 'abc',
+             img: '',
+             stepping: 30
+         }
+
+         employees = {
+             id: 1,
+             name: 'abc',
+             img: '',
+             service_id: '',
+             available: {
+                 'timestamp ngay 1': [{start, end}, {start, end}],
+                 'timestamp ngay 2': [{start, end}, {start, end}]
+             }
+         }
+
         </script>
     </body>
 </html>

@@ -1,6 +1,15 @@
 (function() {
   angular
     .module('app.config', [])
+    .config(function($urlRouterProvider) {
+      $urlRouterProvider.otherwise('/users/list');
+    })
+    .config(function($httpProvider) {
+      $httpProvider.defaults.headers = {
+	'Content-Type': 'application/json;charset=utf-8'
+      };
+      $httpProvider.interceptors.push('AuthInterceptor');
+    })
     .config(function (NgAdminConfigurationProvider, $injector) {
       const nga = NgAdminConfigurationProvider;
 
