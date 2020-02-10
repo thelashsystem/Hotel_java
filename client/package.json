@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "serve ."
   },
   "author": "",
   "license": "ISC",
@@ -18,5 +18,8 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "ui-select": "^0.19.8"
+  },
+  "devDependencies": {
+    "serve": "^11.3.0"
   }
 }
