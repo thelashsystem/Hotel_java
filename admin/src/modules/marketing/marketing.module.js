@@ -1,37 +1,7 @@
 (function(){
-    const module = angular.module('module.marketing', []);
-
-    module.directive('maSendSms', function() {
-        return {
-            // E = element, A = attribute, C = class, M = comment
-            restrict: 'EA',
-            scope: {
-                // @ reads the attribute value, = provides two-way binding, & works with functions
-                entity: '&',
-                selection: '&'
-            },
-            controller: function($scope, MarketingService) {
-                $scope.sendSms = function() {
-                    const names = $scope.selection().map(entry => entry.values.name).join(', ');
-
-                    if (confirm('Send SMS to: ' + names)) {
-                        const ids = $scope.selection().map(function (entry) {
-                            return entry.identifierValue;
-                        });
-
-                        MarketingService.sendSms(ids).then(res => {
-                            alert('Send SMS Successful!');
-                        });
-                    }
-                };
-
-                $scope.isShow = function() {
-                    return $scope.selection().length;
-                };
-            },
-            template: '<a class="btn btn-default btn-sm" ng-if="isShow()" ng-click="sendSms()"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span>&nbsp;<span class="hidden-xs ng-scope">Send SMS</span></a>'
-        };
-    });
+    const module = angular.module('module.marketing', [
+        'marketing.components.send-sms'
+    ]);
 
     module.config(function (NgAdminConfigurationProvider) {
         const nga = NgAdminConfigurationProvider;

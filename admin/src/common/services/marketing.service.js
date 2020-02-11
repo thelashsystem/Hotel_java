@@ -4,9 +4,10 @@
   function MarketingService($http) {
     var service = {};
 
-      service.sendSms = function(ids) {
+      service.sendSms = function(ids, message) {
           return $http.post(window.config.baseApiUrl + 'sms_sending', {
-              customerIds: ids
+              customerIds: ids,
+              message: message
           });
       };
 
