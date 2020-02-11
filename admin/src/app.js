@@ -7,6 +7,7 @@ window.addEntity = (name, entity) => {
 
 angular.module('app.third-party', [
     'ng-admin',
+    'ui.bootstrap',
     'ui.calendar',
     'ngStorage'
 ]);
@@ -16,7 +17,8 @@ angular.module('app.resources', []);
 angular.module('app.services', [
     'service.utility',
     'service.user',
-    'service.auth'
+    'service.auth',
+    'service.marketing'
 ]);
 
 angular.module('app.directives', [
@@ -24,6 +26,7 @@ angular.module('app.directives', [
 ]);
 
 angular.module('app.modules', [
+    'module.marketing',
     'module.user',
     'module.calendar'
 ]);

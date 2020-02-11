@@ -17,6 +17,9 @@
         <script src="node_modules/ng-admin/build/ng-admin.min.js"></script>
         <link rel="stylesheet" href="node_modules/ng-admin/build/ng-admin.min.css">
 
+        <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
         <script src="node_modules/ngstorage/ngStorage.min.js"></script>
 
         <script src="node_modules/angular-ui-calendar/src/calendar.js"></script>
@@ -26,7 +29,14 @@
     <body>
         <div ui-view="ng-admin"></div>
 
+        <script>
+         window.config = {
+             baseApiUrl: 'http://f1c92ec0.ngrok.io/api/admin/'
+         };
+        </script>
+
         <!-- MODULES -->
+        <script src="src/modules/marketing/marketing.module.js"></script>
         <script src="src/modules/user/user.module.js"></script>
 
         <script src="src/modules/calendar/calendar.module.js"></script>
@@ -37,6 +47,7 @@
         <script src="src/common/services/utility.service.js"></script>
         <script src="src/common/services/user.service.js"></script>
         <script src="src/common/services/auth.service.js"></script>
+        <script src="src/common/services/marketing.service.js"></script>
 
         <!-- DIRECTIVES -->
         <script src="src/common/directives/draggable.directive.js"></script>

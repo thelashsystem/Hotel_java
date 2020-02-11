@@ -2,7 +2,7 @@
   angular
     .module('app.config', [])
     .config(function($urlRouterProvider) {
-      $urlRouterProvider.otherwise('/users/list');
+      // $urlRouterProvider.otherwise('/');
     })
     .config(function($httpProvider) {
       $httpProvider.defaults.headers = {
@@ -14,16 +14,19 @@
       const nga = NgAdminConfigurationProvider;
 
       const app = nga.application('Lash Admin')
-            .baseApiUrl('http://jsonplaceholder.typicode.com/'); // main API endpoint
+            .baseApiUrl(window.config.baseApiUrl); // main API endpoint
 
-      const { user } = window.entities;
+      const { marketing } = window.entities;
 
-      app.addEntity(user);
+      app.addEntity(marketing);
 
       app.menu(
         nga.menu()
-          .addChild(nga.menu(user).icon('<span class="glyphicon glyphicon-user"></span>'))
-          .addChild(nga.menu().title('Calendar').link('/calendar').icon('<span class="glyphicon glyphicon-calendar"></span>'))
+          .addChild(nga.menu(marketing).icon('<span class="glyphicon glyphicon-shopping-cart"></span>'))
+          .addChild(nga.menu().title('Staff Services').link('/staff-services').icon('<span class="glyphicon glyphicon-calendar"></span>'))
+          .addChild(nga.menu().title('Payment Manager').link('/payment-manager').icon('<span class="glyphicon glyphicon-euro"></span>'))
+          .addChild(nga.menu().title('Payment Report').link('/payment-report').icon('<span class="glyphicon glyphicon-stats"></span>'))
+          .addChild(nga.menu().title('Customer Report').link('/customer-report').icon('<span class="glyphicon glyphicon-equalizer"></span>'))
       );
 
       nga.configure(app);
