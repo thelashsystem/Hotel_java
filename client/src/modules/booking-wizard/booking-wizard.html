@@ -235,6 +235,25 @@
      filter: grayscale(100%);
      pointer-events: none;
  }
+
+ .ui-select-container > a {
+     border: 1px solid #e6e6e6 !important;
+ }
+
+ .input-date-time-picker {
+     margin-right: 5px;
+ }
+
+ .input-date-time-picker > .form-control {
+     width: 100px;
+     height: 26px;
+     padding: 10px;
+ }
+
+ .input-date-time-picker > .input-group-addon {
+     padding: 4px;
+     height: 26px;
+ }
 </style>
 
 <div class="lds-container" ng-if="loading">
@@ -374,19 +393,31 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-item w-20" style="justify-content: flex-end">
-                            <div class="input-group" datetimepicker
+                        <div class="flex flex-item" style="justify-content: flex-end">
+                            <div class="input-group input-date-time-picker" datetimepicker
                                  ng-model="form.services[item.id].date"
                                  options="{
-                                        format: 'MM/DD/YYYY - HH A',
-                                        enabledHours: availableTimes[form.services[item.id].employeeId][form.services[item.id].date.startOf('day').valueOf()],
+                                        format: 'MM/DD/YYYY',
                                         enabledDates: util.keys(availableTimes[form.services[item.id].employeeId]).map(util.toMoment)
                                         }" >
-                                <input class="form-control" style="width: 160px; padding: 10px;" />
+                                <input class="form-control" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
+
+                            <ui-select ng-if="form.services[item.id].date" style="width: 174px;" ng-model="form.services[item.id].time" theme="select2" title="Choose time" append-to-body="1">
+                                <ui-select-match placeholder="Select time">
+                                    {{ $select.selected.text }}
+                                </ui-select-match>
+                                <ui-select-choices
+                                    repeat="time.value as time in
+                                            availableTimes[form.services[item.id].employeeId][form.services[item.id].date.startOf('day').valueOf()] | propsFilter: { text: $select.search }">
+                                    <div class="flex-item">
+                                        <div class="text" ng-bind-html="time.text | highlight: $select.search"></div>
+                                    </div>
+                                </ui-select-choices>
+                            </ui-select>
                         </div>
                     </div>
                 </div>
@@ -415,7 +446,9 @@
                                      ng-if="form.services[item.id].active"
                                      style="margin-bottom: 5px;">
                                     <div>{{ item.name }} by <b>{{ employeesMap[form.services[item.id].employeeId].name }}</b></div>
-                                    <div>at <b>{{ form.services[item.id].date.valueOf() | date:'medium' }}</b></div>
+                                    <div>at <b>
+                                        {{ form.services[item.id].time.start.valueOf() | date:'short' }} - {{ form.services[item.id].time.end.valueOf() | date:'short' }}
+                                    </b></div>
                                 </div>
                             </td>
                         </tr>

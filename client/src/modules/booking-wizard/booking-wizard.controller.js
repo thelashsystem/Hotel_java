@@ -128,7 +128,38 @@
                       .map(item => item.employeeId);
 
                 employeeIds.forEach(id => {
-                    $scope.availableTimes[id] = $scope.employeesMap[id].available;
+                    $scope.availableTimes[id] = Object.keys($scope.employeesMap[id].available).reduce((result, timestamp) => {
+                        const availableOptions = [];
+
+                        $scope.employeesMap[id].available[timestamp].forEach(({start_time, end_time}) => {
+                            const serviceStepping = $scope.servicesMap[$scope.employeesMap[id].service_id].stepping;
+
+                            let start = moment.unix(start_time);
+                            let end = moment.unix(end_time);
+
+                            while (start.add(serviceStepping, 'minutes') <= end) {
+                                let _start = moment(start);
+                                let _end = moment(start).add(serviceStepping, 'minutes');
+
+                                availableOptions.push({
+                                    text: `${_start.format('hh:mm A')} - ${_end.format('hh:mm A')}`,
+                                    value: {
+                                        start: _start,
+                                        end: _end
+                                    }
+                                });
+
+                                start = start.add(serviceStepping, 'minutes');
+                            }
+                        });
+
+                        return {
+                            ...result,
+                            [moment.unix(timestamp).startOf('day').valueOf()]: availableOptions
+                        };
+                    }, {});
+
+                    $scope.form.services[$scope.employeesMap[id].service_id].date = moment(+Object.keys($scope.availableTimes[id])[0]);
                 });
 
                 $scope.loading = false;
@@ -174,7 +205,7 @@
             }
 
             case 4: {
-                return false;
+                return Object.values($scope.form.services).filter(item => item.active).some(item => !item.time);
             }
 
             case 5: {

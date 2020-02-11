@@ -3,12 +3,12 @@
         .factory('BookingService', BookingService);
 
     function BookingService($http) {
-        const baseApiUrl = 'http://f486ba53.ngrok.io';
+        const baseApiUrl = 'http://f1c92ec0.ngrok.io/';
 
         return {
             findServices: function() {
                 return $http
-                    .get(baseApiUrl + '/api/admin/list_services')
+                    .get(baseApiUrl + '/api/booking/list_services')
                     .then(res => res.data)
                     .catch(err => [
                         {
@@ -39,7 +39,7 @@
             },
             findEmployees: function() {
                 return $http
-                    .get(baseApiUrl + '/api/admin/list_employee')
+                    .get(baseApiUrl + '/api/booking/list_employee')
                     .then(res => res.data)
                     .catch(err => [
                         {
