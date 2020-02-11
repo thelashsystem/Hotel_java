@@ -183,7 +183,27 @@
         };
 
         $scope.done = function() {
-            console.log($scope.form);
+            const data = {
+                info: $scope.form.info,
+                services: Object.keys($scope.form.services)
+                    .filter(serviceId => $scope.form.services[serviceId].active)
+                    .map(serviceId => {
+                        const service = $scope.form.services[serviceId];
+
+                        return {
+                            serviceId: serviceId,
+                            employeeId: service.employeeId,
+                            timeRange: {
+                                start: service.time.start.valueOf(),
+                                end: service.time.end.valueOf()
+                            }
+                        };
+                    })
+            };
+
+            BookingService.confirm(data).then(res => {
+                alert('Booking success!');
+            });
         };
 
         $scope.validateNext = function() {

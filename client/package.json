@@ -20,6 +20,7 @@
     "ui-select": "^0.19.8"
   },
   "devDependencies": {
+    "eruda": "^2.2.0",
     "serve": "^11.3.0"
   }
 }
