@@ -118,7 +118,7 @@
         };
 
         services.confirm = function(data) {
-            return $http.post(baseApiUrl + '/api/booking/confirm', data);
+            return $http.post(baseApiUrl + '/api/booking/confirm', data, { headers: { 'Content-Type': 'application/json' } });
         };
 
         return services;
